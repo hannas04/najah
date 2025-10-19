@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tranquil Path - Islamic Knowledge Hub</title>
+    
+    <!-- Load Inter Font (Primary Latin) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Load Amiri Font (Primary Arabic) -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    
+   
+  
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <span style="font-weight: 300;">Najah</span> Limited
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="nav-desktop">
+                <a href="#hadith" class="nav-link">Hadith</a>
+                <a href="#quran" class="nav-link">Qur'an</a>
+                <a href="#ebook" class="nav-link">E-book</a>
+                <a href="#reflection" class="nav-link">Reflection</a>
+                <a href="#author" class="nav-link">Author</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Menu" aria-expanded="false">
+                <svg style="width: 1.5rem; height: 1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="mobile-menu" style="display: none;">
+            <nav style="display: flex; flex-direction: column; width: 100%;">
+                <a href="#hadith" class="nav-link" onclick="toggleMobileMenu()" style="width: 100%; text-align: center; padding: 0.75rem 0; border-radius: 0;">Hadith</a>
+                <a href="#quran" class="nav-link" onclick="toggleMobileMenu()" style="width: 100%; text-align: center; padding: 0.75rem 0; border-radius: 0;">Qur'an</a>
+                <a href="#ebook" class="nav-link" onclick="toggleMobileMenu()" style="width: 100%; text-align: center; padding: 0.75rem 0; border-radius: 0;">E-book</a>
+                <a href="#reflection" class="nav-link" onclick="toggleMobileMenu()" style="width: 100%; text-align: center; padding: 0.75rem 0; border-radius: 0;">Reflection</a>
+                <a href="#author" class="nav-link" onclick="toggleMobileMenu()" style="width: 100%; text-align: center; padding: 0.75rem 0; border-radius: 0;">Author</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero bg-celestial-dark">
+            <h1 class="hero-title">
+                Guidance & Reflection
+            </h1>
+                <p class="hero-subtitle">
+                    A modern resource dedicated to exploring the timeless wisdom of the Qur'an and Sunnah, lighting the path to tranquility.
+                </p>
+                <a href="#ebook" class="hero-button">
+                    Download Your Free E-Book
+                </a>
+        </section>
+
+        <!-- Hadith Slider Section - Scroll Reveal Added -->
+        <section id="hadith" class="section-padding bg-hadith-rich reveal">
+            <h2 class="section-heading container">
+                The Sunnah: Sayings of the Prophet
+            </h2>
+            
+            <div class="container slide-container hadith-card" style="max-width: 1024px;">
+                <div id="hadith-slides" class="slides">
+                    <!-- CLONE of Last Slide (Index 0) -->
+                    <div class="slide-item hadith-slide-item">
+                        <p>
+                            "Modesty is a part of faith."
+                        </p>
+                        <p>— Sahih Muslim</p>
+                    </div>
+
+                    <!-- Hadith Slide 1 (Actual Start Index 1) -->
+                    <div class="slide-item hadith-slide-item">
+                        <p>
+                            "The best among you are those who learn the Qur'an and teach it."
+                        </p>
+                        <p>— Sahih al-Bukhari</p>
+                    </div>
+
+                    <!-- Hadith Slide 2 (Actual Index 2) -->
+                    <div class="slide-item hadith-slide-item">
+                        <p>
+                            "Indeed, actions are judged by intentions, and every man shall have what he intended."
+                        </p>
+                        <p>— Sahih al-Bukhari & Muslim</p>
+                    </div>
+
+                    <!-- Hadith Slide 3 (Actual End Index 3) -->
+                    <div class="slide-item hadith-slide-item">
+                        <p>
+                            "Modesty is a part of faith."
+                        </p>
+                        <p>— Sahih Muslim</p>
+                    </div>
+                    
+                    <!-- CLONE of First Slide (Index 4) -->
+                    <div class="slide-item hadith-slide-item">
+                        <p>
+                            "The best among you are those who learn the Qur'an and teach it."
+                        </p>
+                        <p>— Sahih al-Bukhari</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button onclick="prevSlide('hadith')" class="slider-button left" aria-label="Previous Hadith">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button onclick="nextSlide('hadith')" class="slider-button right" aria-label="Next Hadith">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Quranic Verses Slider Section - Scroll Reveal Added -->
+        <section id="quran" class="section-padding bg-quran-light reveal">
+            <h2 class="section-heading container">
+                The Divine Revelation: Quranic Verses
+            </h2>
+
+            <div class="container slide-container quran-card" style="max-width: 1024px;">
+                <div id="quran-slides" class="slides">
+                    <!-- CLONE of Last Slide (Index 0) -->
+                    <div class="slide-item quran-slide-item">
+                        <p class="text-arabic">
+                            يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ
+                        </p>
+                        <p>
+                            "O you who have believed, seek help through patience and prayer. Indeed, Allah is with the patient."
+                        </p>
+                        <p>— Surah Al-Baqarah (2:153)</p>
+                    </div>
+                    
+                    <!-- Quran Verse 1 (Actual Start Index 1) -->
+                    <div class="slide-item quran-slide-item">
+                        <p class="text-arabic">
+                            إِنَّا أَنزَلْنَاهُ قُرْآنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ
+                        </p>
+                        <p>
+                            "Indeed, We have sent it down as an Arabic Qur'an so that you might understand."
+                        </p>
+                        <p>— Surah Yusuf (12:2)</p>
+                    </div>
+
+                    <!-- Quran Verse 2 (Actual End Index 2) -->
+                    <div class="slide-item quran-slide-item">
+                        <p class="text-arabic">
+                            يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ
+                        </p>
+                        <p>
+                            "O you who have believed, seek help through patience and prayer. Indeed, Allah is with the patient."
+                        </p>
+                        <p>— Surah Al-Baqarah (2:153)</p>
+                    </div>
+                    
+                    <!-- CLONE of First Slide (Index 3) -->
+                    <div class="slide-item quran-slide-item">
+                        <p class="text-arabic">
+                            إِنَّا أَنزَلْنَاهُ قُرْآنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ
+                        </p>
+                        <p>
+                            "Indeed, We have sent it down as an Arabic Qur'an so that you might understand."
+                        </p>
+                        <p>— Surah Yusuf (12:2)</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button onclick="prevSlide('quran')" class="slider-button left" aria-label="Previous Verse">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button onclick="nextSlide('quran')" class="slider-button right" aria-label="Next Verse">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- E-book Download Section - Scroll Reveal Added -->
+        <section id="ebook" class="section-padding bg-ebook-calm reveal">
+            <div class="container ebook-card">
+                <h2>
+                    Free E-Book: The 40 Foundations
+                </h2>
+                <p>
+                    Download your complimentary copy of "The 40 Foundations of Faith," a concise guide to fundamental Islamic principles.
+                </p>
+                
+                <!-- Simple Text Placeholder -->
+                <div class="ebook-placeholder">
+                    E-book Guide
+                </div>
+                
+                <!-- Download Button (Placeholder URL) -->
+                <a href="/download/ebook-foundations.pdf" download="The_40_Foundations.pdf" 
+                   class="download-button">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download Now (PDF)
+                </a>
+            </div>
+        </section>
+
+        <!-- Daily Reflection & Featured Topics Section - Scroll Reveal Added -->
+        <section id="reflection" class="section-padding bg-hadith-rich reveal">
+            <h2 class="section-heading container" style="color: var(--primary-teal);">
+                Daily Reflection & Featured Topics
+            </h2>
+            <div class="container" style="max-width: 1024px;">
+
+                <!-- Daily Dua Widget -->
+                <div class="dua-card">
+                    <h3 style="font-size: 1.5rem; color: var(--primary-gold); margin-bottom: 2rem;">A Moment of Dua</h3>
+                    <div id="dua-display">
+                        <p class="text-arabic" id="dua-arabic">
+                            رَبِّ زِدْنِي عِلْمًا
+                        </p>
+                        <p id="dua-translation">
+                            "My Lord, increase me in knowledge."
+                        </p>
+                        <p class="source" id="dua-source">
+                            — Qur'an 20:114
+                        </p>
+                    </div>
+                    <button onclick="nextDua()" aria-label="Next Daily Supplication">
+                        Next Dua
+                        <svg style="width: 1rem; height: 1rem; margin-left: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Featured Topics Grid -->
+                <div class="topic-grid">
+                    <div class="topic-item">
+                        <h4>Fiqh: Jurisprudence</h4>
+                        <p>Explore the rules and principles governing religious rites and daily life according to different schools of thought.</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Tafsir: Exegesis</h4>
+                        <p>Deep dive into the meanings and interpretations of the Holy Qur'an, verse by verse.</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Seerah: Prophetic Biography</h4>
+                        <p>Learn about the life, actions, and character of the Prophet Muhammad (peace be upon him).</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About the Author Section - Scroll Reveal Added -->
+        <section id="author" class="section-padding reveal" style="background-color: var(--deep-dark);">
+            <h2 class="section-heading container">
+                About the Author
+            </h2>
+            <div class="container author-card">
+                
+                <!-- Placeholder for Author Image -->
+                <!-- <div class="author-image-placeholder"> -->
+                    <img class="author-image-placeholder" src="img/author.jpg" alt="">
+                <!-- </div> -->
+
+                <!-- Author Bio -->
+                <div class="author-bio">
+                    <h3 class="author-name">
+                     Abdulbasit ibn Sadiq
+                    </h3>
+                    <p class="subtitle">
+                        Researcher and Educator in Islamic Studies
+                    </p>
+                    <p class="text">
+                       Abdulbasit ibn Sadiq El-okene is a devoted student of Islamic knowledge, writer, and health educator who strives to connect faith, learning, and service. His journey began with a deep desire to understand the Qur’an and live by the teachings of the Prophet Muhammad through the effort put forth by his parent(Alhaji Sadiq & Hajiya rabiat)and teachers.Guided by the belief that knowledge refines both the mind and soul, Abdulbasit integrates Islamic values into his work as a health educator  promoting wellness as a trust from Allah. Through his writings, he reflects on faith, self development, and purposeful living, using words as a means of da’wah and inspiration. He often says, “Knowledge is a trust and writing is a legacy so what ever I learn I must pass on .” With sincerity and humility, Abdulbasit continues to seek knowledge, teach others, and inspire positive change through faith and understanding 
+                    </p>
+                    <div class="author-links">
+                        <a href="mailto:ahmad@example.com" class="hover:text-white">Email</a>
+                        <a href="#" class="hover:text-white">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Najah Limited. All rights reserved.</p>
+            <p class="mt-2" style="margin-top: 0.5rem;">May peace and blessings be upon you.</p>
+        </div>
+    </footer>
+
+
+
+  <script src="index.js"></script>
+
+</body>
+</html>

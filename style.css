@@ -1,0 +1,613 @@
+        /* --- CSS Variables and Global Styles (Refined) --- */
+        :root {
+            --deep-dark: #070D14; /* Near black background */
+            --primary-gold: #FCD34D; /* Warm Gold */
+            --primary-teal: #10B981; /* Calming Teal/Emerald */
+            --secondary-dark: #1F2937; /* Dark Gray for secondary elements */
+            --text-light: #E5E7EB; /* Light text on dark bg */
+            --text-dark: #111827; /* Dark text on light bg */
+            --hadith-bg: #143633; /* Darker, richer color for Hadith */
+            --quran-bg-light: #F9FAFB; /* Very light background for Quran contrast */
+            --transition-speed: 0.3s;
+            --transition-slider: 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --header-height: 56px; /* height used for header and overlay offsets */
+        }
+
+        /* Use border-box everywhere to avoid width calculation surprises */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        /* Prevent small horizontal overflow on mobile devices */
+        html, body {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-dark);
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            padding-top: var(--header-height); /* ensure content sits below fixed header */
+        }
+
+        .text-arabic {
+            font-family: 'Amiri', serif;
+            direction: rtl;
+        }
+        
+        /* --- MODERN TRANSITIONS AND SCROLL EFFECTS --- */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* General Hover Enhancement: Apply smooth, custom transition to all interactive elements */
+        .hadith-card, .quran-card, .dua-card, .topic-item, .hero-button, .download-button, .slider-button, .nav-link {
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+
+        /* --- Utility Classes and Layout --- */
+        .container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem; 
+            padding-right: 1.5rem;
+            width: 100%;
+        }
+
+        .section-padding {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+            /* When linking to anchors, offset the scroll so headings are visible below the fixed header */
+            section, .section-padding, .section-heading, .container {
+                scroll-margin-top: calc(var(--header-height) + 12px);
+            }
+
+        /* --- Background Themes --- */
+        .bg-celestial-dark {
+            background: radial-gradient(circle at 50% 10%, var(--secondary-dark), var(--deep-dark) 80%);
+        }
+        .bg-hadith-rich {
+            background-color: var(--deep-dark);
+        }
+        .bg-quran-light {
+            background-color: var(--quran-bg-light);
+            color: var(--text-dark); 
+        }
+        .bg-quran-light .section-heading {
+            color: var(--primary-teal); 
+        }
+
+
+        /* --- Header and Navigation (Mobile First) --- */
+        /* Make header fixed so it stays in the same place across sections */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            z-index: 50;
+            background-color: rgba(7, 13, 20, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .nav-link:hover {
+            color: var(--primary-gold);
+            background-color: rgba(252, 211, 77, 0.1);
+        }
+        .nav-desktop { display: none; }
+        .mobile-menu-btn {
+            padding: 0.5rem;
+            border: none;
+            background: none;
+            color: var(--primary-gold);
+            cursor: pointer;
+        }
+        .mobile-menu {
+            position: fixed; /* keep menu in viewport so it can appear over any section */
+            inset: var(--header-height) 0 0 0; /* below the header */
+            left: 0;
+            width: 100%;
+            height: calc(100vh - var(--header-height));
+            background-color: rgba(7, 13, 20, 0.95);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            padding: 1rem 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 45; /* behind the header but above page content */
+            /* start hidden for smooth CSS-based open/close */
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: opacity 260ms cubic-bezier(0.2,0.8,0.2,1), transform 260ms cubic-bezier(0.2,0.8,0.2,1);
+        }
+        .mobile-menu-open {
+            display: flex !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* class used while the menu is closing so we can animate then hide */
+        .mobile-menu-closing {
+            opacity: 0 !important;
+            transform: translateY(-6px) !important;
+        }
+
+        /* Ensure header and toggle button remain above the mobile menu */
+        .header { z-index: 50; }
+        .mobile-menu-btn { z-index: 60; position: relative; }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            /* Make the hero exactly fill the viewport area below the fixed header */
+            height: calc(100vh - var(--header-height));
+            min-height: calc(100vh - var(--header-height));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2.25rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-title {
+            font-size: 2.75rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            /* text-shadow: 0 6px 30px rgba(252, 211, 77, 0.18), 0 2px 6px rgba(0,0,0,0.6); */
+            /* subtle gilded gradient via background-clip for modern browsers */
+            background: linear-gradient(90deg, #FCD34D 0%, #FFD66B 50%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* gentle float + glow */
+            animation: floatGlow 6s ease-in-out infinite;
+        }
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: #E6E7EA; /* slightly brighter */
+            max-width: 44rem;
+            margin: 0 auto 1.75rem auto;
+            opacity: 0.95;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 2.5rem;
+            border: 2px solid var(--primary-gold);
+            font-size: 1.125rem;
+            font-weight: bold;
+            border-radius: 9999px;
+            color: var(--deep-dark);
+            background-color: var(--primary-gold);
+            box-shadow: 0 0 15px rgba(252, 211, 77, 0.5);
+            text-decoration: none;
+            transition: transform 260ms ease, box-shadow 260ms ease, background-color 260ms ease;
+            will-change: transform;
+            animation: pulse 6s ease-in-out infinite 1s;
+        }
+        
+        /* hero ornament removed per user request; hero content is centered by default */
+*** End Patch
+
+        /* --- Section Headers --- */
+        .section-heading {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-gold);
+        }
+
+        /* --- Sliders --- */
+        .slide-container {
+            overflow: hidden;
+            position: relative;
+            max-width: 1024px;
+            margin: 0 auto;
+            width: 100%; /* ensure full-width on small screens */
+        }
+        .slides {
+            display: flex;
+            flex-wrap: nowrap; /* prevent slides from wrapping */
+            gap: 0;
+            transition: transform var(--transition-slider); /* This is the key transition! */
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+        /* Class to instantly change position without transition */
+        .slides.no-transition {
+            transition: none;
+        }
+        .slide-item {
+            flex: 0 0 100%;
+            min-width: 100%; /* ensure each slide exactly fills the container */
+            box-sizing: border-box; /* include padding in width calculations */
+            text-align: center;
+        }
+
+        /* Make sure slide content never overflows into the next slide */
+        .slide-item > * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide-item p, .slide-item div {
+            margin: 0 auto;
+            padding: 0 1rem;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        /* Constrain Arabic text so it wraps properly */
+        .text-arabic {
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 0.75rem;
+            border-radius: 50%;
+            color: var(--primary-gold);
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            background-color: rgba(55, 65, 81, 0.7);
+            z-index: 10;
+        }
+        .slider-button:hover {
+            background-color: #4B5563;
+            opacity: 1;
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        /* small focus-visible style for accessibility */
+        .slider-button:focus { outline: 2px solid rgba(252,211,77,0.6); }
+        .slider-button.left { left: 1rem; }
+        .slider-button.right { right: 1rem; }
+        .slider-button svg {
+            width: 1.25rem; 
+            height: 1.25rem;
+            display: block;
+        }
+
+        /* Hadith Card Styles */
+        .hadith-card {
+            background-color: var(--hadith-bg); 
+            padding: 3rem 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 
+                0 0 0 5px var(--primary-gold), 
+                0 0 0 7px rgba(252, 211, 77, 0.3), 
+                0 15px 30px rgba(0, 0, 0, 0.6); 
+            max-width: 100%;
+            overflow: hidden; /* ensure inner slides don't overflow card */
+        }
+        .hadith-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 0 0 5px var(--primary-gold),
+                0 0 0 10px rgba(252, 211, 77, 0.6),
+                0 25px 50px rgba(0, 0, 0, 0.9);
+        }
+
+    /* Gentle transitions for cards and nav links */
+    .hadith-card, .quran-card { transition: transform 260ms ease, box-shadow 260ms ease; }
+    .nav-link { transition: color 200ms ease, background-color 200ms ease; }
+
+    /* Keyframes */
+    @keyframes floatGlow {
+        0% { transform: translateY(0); filter: drop-shadow(0 0 12px rgba(252,211,77,0.25)); }
+        50% { transform: translateY(-6px); filter: drop-shadow(0 0 20px rgba(252,211,77,0.35)); }
+        100% { transform: translateY(0); filter: drop-shadow(0 0 12px rgba(252,211,77,0.25)); }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
+
+    /* Respect user preference for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        .hero-title, .hero-button { animation: none !important; }
+        .mobile-menu, .slides { transition: none !important; }
+        .hadith-card, .quran-card { transition: none !important; }
+    }
+
+        /* Quran Card Styles */
+        .bg-quran-light .slider-button {
+            color: var(--text-dark);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .quran-card {
+            background-color: white;
+            padding: 3.5rem 2rem; 
+            border-radius: 1.5rem;
+            border: 5px solid var(--primary-gold); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .quran-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- E-book Section --- */
+        .bg-ebook-calm {
+            background: linear-gradient(135deg, #104e7f 0%, #172B4D 100%);
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+        .ebook-card {
+            background: none;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        .ebook-placeholder {
+            margin: 2rem auto;
+            width: 150px;
+            height: 200px;
+            background-color: #3B82F6;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            border: 5px solid white;
+        }
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 2.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            background-color: var(--primary-teal);
+            color: white;
+            border: 2px solid var(--primary-teal);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            text-decoration: none;
+        }
+        .download-button:hover {
+            background-color: #0d9488;
+            border-color: #0d9488;
+            transform: scale(1.05) perspective(100px) rotateX(3deg);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.8);
+        }
+
+        /* --- Daily Dua Feature Card --- */
+        .dua-card {
+            background-color: var(--secondary-dark);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-teal);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .dua-card button {
+            background-color: var(--primary-teal);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            margin-top: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .dua-card button:hover {
+            background-color: #0d9488;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 5px 10px rgba(16, 185, 129, 0.5);
+        }
+        #dua-display {
+            opacity: 1;
+            transition: opacity 0.4s ease-in-out;
+        }
+        #dua-arabic {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+        #dua-translation {
+            font-style: italic;
+            color: var(--text-light);
+        }
+        #dua-source {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            color: #9CA3AF;
+        }
+
+
+        /* --- Featured Topics Grid --- */
+        .topic-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .topic-item {
+            background-color: var(--secondary-dark);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: left;
+            border-top: 3px solid var(--primary-gold);
+            cursor: pointer;
+        }
+        .topic-item h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        .topic-item:hover {
+            background-color: #1A2234;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* --- Author Section --- */
+        .author-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--secondary-dark);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .author-image-placeholder {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            background-color: var(--primary-teal);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--primary-gold);
+        }
+        .author-name {
+            font-size: 1.75rem;
+            color: var(--primary-gold);
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-style: italic;
+            color: #9CA3AF;
+            margin-bottom: 1.5rem;
+        }
+        .author-links a {
+            color: var(--primary-teal);
+            text-decoration: none;
+            margin-right: 1rem;
+            font-weight: 600;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: #000000;
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+        
+        /* --- Media Queries (Desktop/Tablet) --- */
+        @media (min-width: 768px) {
+            .nav-desktop { 
+                display: flex !important;
+                gap: 2.5rem; 
+            }
+            .mobile-menu-btn { display: none; }
+            .hero-title { font-size: 5rem; }
+            .hero-subtitle { font-size: 1.5rem; }
+            .section-heading { font-size: 3rem; }
+            .slider-button {
+                padding: 1.25rem;
+            }
+            .slider-button svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            .slider-button.left { left: 2rem; }
+            .slider-button.right { right: 2rem; }
+            .slider-button:hover {
+                transform: translateY(-50%) scale(1.15);
+            }
+            .hadith-slide-item p:first-child { font-size: 2rem; }
+            .quran-slide-item .text-arabic { font-size: 3.5rem; }
+            .quran-slide-item p:first-child { font-size: 1.5rem; }
+            .topic-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .author-card {
+                flex-direction: row;
+                text-align: left;
+                padding: 4rem;
+                gap: 3rem;
+            }
+            .author-image-placeholder { 
+                width: 11rem;
+                height: 11rem;
+                font-size: 3rem;
+                margin-bottom: 0; 
+                flex-shrink: 0;
+            }
+        }
+        
+        /* Mobile tweaks */
+        @media (max-width: 767px) {
+            .header { height: 56px; }
+            /* keep hero filling viewport under header on small screens too */
+            .hero { padding: 1.25rem 0.75rem; min-height: calc(100vh - var(--header-height)); height: auto; }
+            .hero-title { font-size: 3.5rem; }
+            .hero-subtitle { font-size: 1rem; max-width: 30rem; }
+            .slide-item p, .slide-item div { padding: 0 0.75rem; }
+            .hadith-card, .quran-card { padding: 1.5rem 1rem; border-radius: 1rem; }
+            .section-padding { padding-top: 3rem; padding-bottom: 3rem; }
+            .slider-button.left { left: 0.5rem; }
+            .slider-button.right { right: 0.5rem; }
+            .section-heading { font-size: 1.5rem; }
+            .quran-card .text-arabic { font-size: 1.6rem; }
+        }
+ 
